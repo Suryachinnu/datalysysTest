@@ -1,0 +1,27 @@
+.list-group{
+  .radio-group{
+    min-width:111px;
+  }
+}
+.form-inline-block{
+  padding:20px;
+}
+.form-inline{
+  margin-bottom: 25px;
+  input{
+    margin-left:15px;
+  }
+  label{
+    font-weight: 600;
+  }
+}
+.bg-grey{
+  background-color: #f2f5f6;
+}
+.form-control[readonly]{
+background-color: #fff;
+}
+.btn{
+  padding-left:25px;
+  padding-right:25px;
+}

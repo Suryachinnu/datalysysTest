@@ -1,0 +1,424 @@
+<div class="container my-4">
+  <main class="card">
+    <div class="card-header">Information</div>
+    <div class="card-body">
+      <form [formGroup]="covidForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-3 col-3">
+            <label>First Name <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="f_Name"
+              required
+            />
+            <span class="text-danger"
+                *ngIf="form.f_Name.touched && form.f_Name.errors?.required">
+                First name is required
+            </span>
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Last Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="l_Name" required/>
+            <span class="text-danger"
+                *ngIf="form.l_Name.touched && form.l_Name.errors?.status">
+                last name is required
+            </span>
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>DOB <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="dob"
+              bsDatepicker
+              readonly required
+            />
+            <span class="text-danger"
+                *ngIf="form.dob.touched && form.dob.errors?.required">
+                Date of birth is required
+            </span>
+          </div>
+          <div class="form-group col-md-3 col-3">
+            <label>Gender</label>
+            <div class="radio-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="gender"
+                  id="male"
+                  value="male"
+                />
+                <label class="form-check-label" for="male">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="gender"
+                  id="female"
+                  value="female"
+                />
+                <label class="form-check-label" for="female">Female</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" formGroupName="address">
+          <div class="form-group col-3 col-md-3">
+            <label>Address 1</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address1"
+            />
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Address 2</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address2"
+            />
+          </div>
+          <div class="form-group col-2 col-md-2">
+            <label>City</label>
+            <input type="text" class="form-control" formControlName="city" />
+          </div>
+          <div class="form-group col-2 col-md-2">
+            <label>State</label>
+            <select formControlName="state" class="form-control">
+              <option selected>-</option>
+              <option value="AP">Andhra Pradesh</option>
+              <option value="TS">Telangana</option>
+            </select>
+          </div>
+          <div class="form-group col-2 col-md-2">
+            <label>Zip</label>
+            <input type="text" class="form-control" formControlName="zip" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-3 col-md-3">
+            <label>Race</label>
+            <select formControlName="race" class="form-control">
+              <option selected>-</option>
+              <option value="1">option 1</option>
+              <option value="2">option 2</option>
+            </select>
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Mobile</label>
+            <input type="tel" class="form-control" formControlName="mobile" />
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Email</label>
+            <input type="text" class="form-control" formControlName="email" />
+          </div>
+        </div>
+
+        <div class="row" formGroupName="insurance">
+          <div class="form-group col-3 col-md-3">
+            <label>Insurance Name</label>
+            <input type="text" class="form-control" formControlName="type" />
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Policy ID/#</label>
+            <input type="text" class="form-control" formControlName="id" />
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Group</label>
+            <input type="text" class="form-control" formControlName="group" />
+          </div>
+        </div>
+        <div class="row" formGroupName="insurance">
+          <div class="form-group col-3 col-md-3">
+            <label>Name of Insured</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+          <div class="form-group col-3 col-md-3">
+            <label>Relationship</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="relation"
+            />
+          </div>
+        </div>
+        <h6>Note: <small>*please provide .jpg .png format files</small></h6>
+        <div class="row">
+          <div class="col-md-3">
+            <p class="text-center mb-0">Photo Id</p>
+            <app-file
+              contrlName="photoId"
+              (fileChange)="setValue($event, 'photoId')"
+            ></app-file>
+          </div>
+          <div class="col-md-3">
+            <p class="text-center mb-0">Insurance Id</p>
+            <app-file
+              contrlName="insuranceId"
+              (fileChange)="setValue($event, 'insuranceId')"
+            ></app-file>
+          </div>
+        </div>
+        <h3 class="mt-4">Questionaire</h3>
+        <hr />
+        <ul class="list-group">
+          <li class="list-group-item bg-grey d-flex justify-content-between">
+            <div class="d-inline-block">
+              Have you or anyone in your family traveled outside your state of
+              residence in the past two days
+            </div>
+
+            <div class="radio-group d-inline-block ml-auto">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="travel"
+                  id="male"
+                  value="1"
+                />
+                <label class="form-check-label" for="male">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="travel"
+                  id="female"
+                  value="0"
+                />
+                <label class="form-check-label" for="female">No</label>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="d-inline-block">
+              in the Past 2 weeks have you or anyone in your household had
+              contact with any person suspected or confirmed to have contacted
+              corona virus
+            </div>
+            <div class="radio-group d-inline-block ml-auto">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="contactWithSuspect"
+                  id="male"
+                  value="1"
+                />
+                <label class="form-check-label" for="male">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="contactWithSuspect"
+                  id="female"
+                  value="0"
+                />
+                <label class="form-check-label" for="female">No</label>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item bg-grey">
+            <div class="d-flex justify-content-between">
+<div class="d-inline-block">
+              Have you had a Covid (Nasal or Swab test) test performed in the
+              past
+            </div>
+            <div class="radio-group d-inline-block ml-auto">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="isSwabTestDone"
+                  id="yes"
+                  value="1"
+                />
+                <label class="form-check-label" for="yes">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="isSwabTestDone"
+                  id="no"
+                  value="0"
+                />
+                <label class="form-check-label" for="no">No</label>
+              </div>
+            </div>
+            </div>
+
+            <ng-container formGroupName="covidTest" *ngIf="isSwabTestDone == '1'">
+              <div class="form-inline-block">
+              <div class="form-inline" >
+                <label>Date of performing test</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="date"
+                  bsDatepicker readonly
+                />
+              </div>
+              <div class="form-inline">
+                <label>Lab Perfoming the test</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="labName"
+                />
+              </div>
+
+              <div class="radio-group">
+                Result of test
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="result"
+                    id="yes"
+                    value="Positive"
+                  />
+                  <label class="form-check-label" for="yes">Positive</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="result"
+                    id="no"
+                    value="Negative"
+                  />
+                  <label class="form-check-label" for="no">Negative</label>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+          </li>
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+<div class="d-inline-block">
+              Have you had a antibody test performed in the past
+            </div>
+            <div class="radio-group d-inline-block ml-auto">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="isAntibodyTestDone"
+                  id="male"
+                  value="1"
+                />
+                <label class="form-check-label" for="male">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="isAntibodyTestDone"
+                  id="no"
+                  value="0"
+                />
+                <label class="form-check-label" for="no">No</label>
+              </div>
+            </div>
+            </div>
+
+            <ng-container formGroupName="antiBodyTest" *ngIf="isAntibodyTestDone == '1'">
+              <div class="form-inline-block">
+              <div class="form-inline" >
+                <label>Date of performing test</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="date"
+                  bsDatepicker readonly
+                />
+              </div>
+              <div class="form-inline">
+                <label>Lab Perfoming the test</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="labName"
+                />
+              </div>
+              <div class="radio-group">
+               Tested Antibodies
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="antibodies"
+                    id="IgM"
+                    value="IgM"
+                  />
+                  <label class="form-check-label" for="IgM">IgM</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="antibodies"
+                    id="IgG"
+                    value="IgG"
+                  />
+                  <label class="form-check-label" for="IgG">IgG</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="antibodies"
+                    id="both"
+                    value="both"
+                  />
+                  <label class="form-check-label" for="both">both</label>
+                </div>
+              </div>
+              <div class="radio-group">
+                Result of test
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="result"
+                    id="yes"
+                    value="Reactive"
+                  />
+                  <label class="form-check-label" for="yes">Reactive</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="result"
+                    id="no"
+                    value="Non Reactive"
+                  />
+                  <label class="form-check-label" for="no">Non Reactive</label>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+          </li>
+        </ul>
+        <hr class="my-3" />
+        <div class="text-right">
+          <button
+          class="btn btn-primary ml-auto"
+          type="submit"
+          [disabled]="!covidForm.valid"
+        >
+          Submit
+        </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
